@@ -7,12 +7,12 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 
-class GoogleMapview extends StatefulWidget {
+class HomeScreen extends StatefulWidget {
   @override
-  State<GoogleMapview> createState() => GoogleMapviewState();
+  State<HomeScreen> createState() => HomeScreenState();
 }
 
-class GoogleMapviewState extends State<GoogleMapview> {
+class HomeScreenState extends State<HomeScreen> {
   ///마커 추가
   ///왜 리스트 형식인가??
   List<Marker> _markers = [];
