@@ -39,8 +39,11 @@
             android:value="2" />
        <meta-data
            android:name="com.google.android.geo.API_KEY"
-           android:value="AIzaSyDuS3tbZQd1ib4MXvbtY2nleHJvLUlT1oU" />
+           android:value="${googleMapApiKey}" />
     </application>
+<!--    location 접근 얻기 위함  이미 밑 코드로 얻었으므로 삭제-->
+<!--    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />-->
+
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
 <!--    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />-->

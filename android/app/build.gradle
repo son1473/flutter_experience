@@ -25,6 +25,16 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
+// app level build.gradle
+/**
+ * Hide API keys
+ */
+//Properties properties = new Properties() 최상위에 선언되어 있어, 삭제
+localProperties.load(project.rootProject.file('local.properties').newDataInputStream())
+def googleMapApiKey = localProperties.getProperty('google.map.key')
+//google map
+
+
 android {
     compileSdkVersion 30
 
@@ -39,6 +49,8 @@ android {
         targetSdkVersion 30
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+        manifestPlaceholders = [googleMapApiKey:googleMapApiKey]
+        //추가.
     }
 
     buildTypes {

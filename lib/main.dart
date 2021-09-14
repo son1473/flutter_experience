@@ -9,6 +9,7 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    print("myApp의 buildContext-위치정보 : ${context.hashCode}"); //3
     return MaterialApp(
       title: 'Flutter Google Maps Demo',
       home: HomeScreen(),
