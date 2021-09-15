@@ -47,16 +47,16 @@ class HomeScreenState extends State<HomeScreen> {
   //     // tilt: 59.440717697143555,
   //     zoom: 19.151926040649414);
 
-  @override
-  void initState() {
-    super.initState();
+  // @override
+  // void initState() {
+  //   super.initState();
     // MarkerFunction().addMarker();
     //   // _markers.add(Marker( //todo: 함수이기 때문에 추가 가능.
     //   //     markerId: MarkerId("1"),
     //   //     draggable: true, //todo: 마커 눌러서 드래그 가능여부
     //   //     onTap: () => print("Marker!"),
     //   //     position: LatLng(37.531774, 126.841079)));
-  }
+  // }
 
   //section function updatePosition
   // void _updatePosition(CameraPosition _position) {
@@ -150,10 +150,19 @@ class HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     MapController mapController = MapController();
-    MarkerFunction firstMark = MarkerFunction();
+    MarkerFunction markerFunctions = MarkerFunction();
     GetPosition getPosition = GetPosition();
-    LocationFunctions locateTool = LocationFunctions();
+    LocationFunctions locationFunctions = LocationFunctions();
     // section google Map body
+    //밖에서 하는 일 : 아니 이 모든 건 안에서 해야만 했다. 그래서 이 코드 만드신 분이, 그렇게 만드신 거였다. 나는 그것도 모르고, 그냥 다 divide 하려고 했다.
+    //코드 쓰신 사람의 마음을 헤아려야 한다. 어떤 의도와 목적으로 이 코드를 이렇게 짜신 것인지. 이렇게 논리가 조금씩 늘고 있다.
+    //내가 해야하는 것은 이제 객체 지향적으로 내가 다 만들어 보는 것이다.
+    //코드를 지우고 다 새로 해보자. 난 할 수 있다. 좀 만 더 생각해보자.
+    // 1. 첫 카메라 위치,
+    // 2. 맵생성 - 구글맵 컨트롤러,
+    // 3. 위치허가,
+    // 4. 마커 리스트 받기,
+    // 5. 현재 위치로 이동,
     return new Scaffold(
       body: GoogleMap(
         myLocationEnabled: true,
@@ -163,9 +172,9 @@ class HomeScreenState extends State<HomeScreen> {
         onMapCreated: (GoogleMapController controller) {
           mapController.useController().complete(controller);
           // _controller.complete(controller); //todo: _controller 사용하려 함수 사용했다.
-          locateTool.getLocationPermission(); //todo: 권한 허용 추가 완료.
+          locationFunctions.getLocationPermission(); //todo: 권한 허용 추가 완료.
         },
-        markers: Set.from(firstMark.getMarkerList()),
+        markers: Set.from(markerFunctions.getMarkerList()),
         // onCameraMove: ((_position) => _updatePosition(_position)),
         // onCameraMove: (
         //         (position) {
@@ -176,15 +185,7 @@ class HomeScreenState extends State<HomeScreen> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
-          firstMark.addMarker(firstMark.getMarkerList());
-          setState(() {
-            GoogleMap(
-              markers: Set.from(firstMark.getMarkerList()),
-              initialCameraPosition: getPosition.getGooglePosition(),
-            );
-          });
-          locateTool.lookCurrentLocation();
-          print("마커 리스트에 추가 되었니?${firstMark.getMarkerList()}");
+          locationFunctions.lookCurrentLocation();
           // _lookCurrentLocation();
         },
         label: Text('현재 위치로!'),
